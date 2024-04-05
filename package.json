@@ -1,0 +1,15 @@
+{
+  "dependencies": {
+    "@slack/bolt": "^3.17.1"
+  },
+  "name": "wheelie-bolt-app",
+  "version": "1.0.0",
+  "main": "app.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Fiona",
+  "license": "ISC",
+  "description": ""
+}
