@@ -1,12 +1,15 @@
 const { App } = require('@slack/bolt');
 const { admin } = require('./commands/admin')
+const { redisStore } = require('./lib/redis-store')
 
-// Initializes your app in socket mode with your app token and signing secret
+// Initializes your app
 const app = new App({
-    token: process.env.SLACK_BOT_TOKEN,
     signingSecret: process.env.SLACK_SIGNING_SECRET,
-    socketMode: true,
-    appToken: process.env.SLACK_APP_TOKEN,
+    clientId: process.env.SLACK_CLIENT_ID,
+    clientSecret: process.env.SLACK_CLIENT_SECRET,
+    installationStore: redisStore,
+    stateSecret: 'my-secret',
+    scopes: ['chat:write', 'commands'],
 });
 
 app.command('/admin', admin);
