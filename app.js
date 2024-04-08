@@ -1,15 +1,15 @@
 const { App } = require('@slack/bolt');
 const { admin } = require('./commands/admin')
-const { redisStore } = require('./lib/redis-store')
+const { redisStore } = require('./lib/redis-store');
 
 // Initializes your app
 const app = new App({
     signingSecret: process.env.SLACK_SIGNING_SECRET,
     clientId: process.env.SLACK_CLIENT_ID,
     clientSecret: process.env.SLACK_CLIENT_SECRET,
-    installationStore: redisStore,
     stateSecret: 'my-secret',
     scopes: ['chat:write', 'commands'],
+    installationStore: redisStore,
 });
 
 app.command('/admin', admin);
