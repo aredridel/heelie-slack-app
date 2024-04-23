@@ -14,7 +14,7 @@ features:
   slash_commands:
     - command: /admin
       url: ${{ variables.url }}/slack/events
-      description: Notifies the admin channel
+      description: Make an admin report
       usage_hint: "[message for admin]"
       should_escape: false
     - command: /list-private
@@ -28,7 +28,7 @@ features:
       should_escape: false
     - command: /help?
       url: ${{ variables.url }}/slack/events
-      description: Displays @heelie-bot help
+      description: Show all Heelie commands
       should_escape: false
 oauth_config:
   redirect_urls:

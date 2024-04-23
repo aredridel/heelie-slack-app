@@ -14,7 +14,7 @@ const joinPrivate = async ({
   const channelName = command.text.replace(/^\#/, '');
   const channel = chans.find((g) => g.name === channelName);
   if (!channel) {
-    respond(`#${channelName} is not available through this command.`);
+    respond(`#${channelName} not found. Heelie must be a member of ${channelName}.`);
   }
   const cocTxt = process.env.COC_URL ? `<${process.env.COC_URL}|Code of Conduct>` : 'Code of Conduct';
   await client.chat.postMessage({
