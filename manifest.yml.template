@@ -1,0 +1,48 @@
+# To bootstrap your App config on Slack:
+# Replace the variables below in the template
+# variables.app_name = Heelie Bot [Dev/Staging]
+# variables.app_url = https://e9af-218-212-166-73.ngrok-free.app
+
+display_information:
+  name: ${{ variables.app_name }}
+  description: Custom helper bot to contact admin, manage group, etc
+  background_color: "#420442"
+features:
+  bot_user:
+    display_name: ${{ variables.app_name }}
+    always_online: false
+  slash_commands:
+    - command: /admin
+      url: ${{ variables.url }}/slack/events
+      description: Notifies the admin channel
+      usage_hint: "[message for admin]"
+      should_escape: false
+    - command: /list-private
+      url: ${{ variables.url }}/slack/events
+      description: List private channels
+      should_escape: false
+    - command: /join-private
+      url: ${{ variables.url }}/slack/events
+      description: Join a private channel
+      usage_hint: <channel>
+      should_escape: false
+    - command: /help?
+      url: ${{ variables.url }}/slack/events
+      description: Displays @heelie-bot help
+      should_escape: false
+oauth_config:
+  redirect_urls:
+    - ${{ variables.url }}/slack/oauth_redirect
+  scopes:
+    bot:
+      - channels:read
+      - chat:write
+      - commands
+      - groups:read
+settings:
+  interactivity:
+    is_enabled: true
+    request_url: ${{ variables.url }}/slack/events
+  org_deploy_enabled: false
+  socket_mode_enabled: false
+  token_rotation_enabled: false
