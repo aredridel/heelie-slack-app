@@ -2,6 +2,7 @@ const { App } = require('@slack/bolt');
 const { redisStore } = require('./lib/redis-store');
 
 const { admin } = require('./commands/admin');
+const { help } = require('./commands/help');
 const { joinPrivate } = require('./commands/join-private');
 const { listPrivate } = require('./commands/list-private');
 
@@ -16,6 +17,7 @@ const app = new App({
 });
 
 app.command('/admin', admin);
+app.command('/help?', help);
 app.command('/join-private', joinPrivate);
 app.command('/list-private', listPrivate);
 
