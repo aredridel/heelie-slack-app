@@ -1,10 +1,14 @@
 const { App } = require('@slack/bolt');
 const { redisStore } = require('./lib/redis-store');
 
+// Commands
 const { admin } = require('./commands/admin');
 const { help } = require('./commands/help');
 const { joinPrivate } = require('./commands/join-private');
 const { listPrivate } = require('./commands/list-private');
+
+// Actions
+const { joinPrivateAction } = require('./actions/join-private');
 
 // Initializes your app
 const app = new App({
@@ -16,10 +20,14 @@ const app = new App({
   installationStore: redisStore,
 });
 
+// Commands
 app.command('/admin', admin);
 app.command('/help?', help);
 app.command('/join-private', joinPrivate);
 app.command('/list-private', listPrivate);
+
+// Actions
+app.action('join-private-action', joinPrivateAction);
 
 (async () => {
   // Start your app
