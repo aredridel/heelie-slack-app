@@ -8,6 +8,7 @@ const { joinPrivate } = require('./commands/join-private');
 const { listPrivate } = require('./commands/list-private');
 
 // Actions
+const { invitePrivateAction } = require('./actions/invite-private');
 const { joinPrivateAction } = require('./actions/join-private');
 
 // Initializes your app
@@ -16,7 +17,7 @@ const app = new App({
   clientId: process.env.SLACK_CLIENT_ID,
   clientSecret: process.env.SLACK_CLIENT_SECRET,
   stateSecret: 'my-secret',
-  scopes: ['chat:write', 'commands', 'groups:read'],
+  scopes: ['chat:write', 'commands', 'groups:read', 'groups:write.invites'],
   installationStore: redisStore,
 });
 
@@ -27,6 +28,7 @@ app.command('/join-private', joinPrivate);
 app.command('/list-private', listPrivate);
 
 // Actions
+app.action('invite-private-action', invitePrivateAction);
 app.action('join-private-action', joinPrivateAction);
 
 (async () => {

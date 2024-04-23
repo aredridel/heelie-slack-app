@@ -1,3 +1,5 @@
+const { sendInviteRequest } = require('../actions/join-private');
+
 const Group = require('../models/group');
 
 const joinPrivate = async ({
@@ -16,11 +18,10 @@ const joinPrivate = async ({
   if (!channel) {
     respond(`#${channelName} not found. Heelie must be a member of ${channelName}.`);
   }
+
+  await sendInviteRequest(client, channelName, command.user_id);
+
   const cocTxt = process.env.COC_URL ? `<${process.env.COC_URL}|Code of Conduct>` : 'Code of Conduct';
-  await client.chat.postMessage({
-    channel: channel.id,
-    text: `Invite request from <@${command.user_id}>! Use \`/invite <@${command.user_id}>\` to accept (anyone here can do this)!`,
-  });
   respond(`Join request sent. Please wait while the request is processed.\n\nRemember that private channels are not for allies unless otherwise specified and that there is a strong expectation of privacy in these channels -- what is said in there stays there.\n\nThe ${cocTxt} still fully applies in these spaces, with some channel-specific caveats (discussion of sexuality in lgbtq channels, for example).`);
 };
 

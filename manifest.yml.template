@@ -24,7 +24,7 @@ features:
     - command: /join-private
       url: ${{ variables.url }}/slack/events
       description: Join a private channel
-      usage_hint: <channel>
+      usage_hint: "[channel name]"
       should_escape: false
     - command: /help?
       url: ${{ variables.url }}/slack/events
@@ -35,10 +35,10 @@ oauth_config:
     - ${{ variables.url }}/slack/oauth_redirect
   scopes:
     bot:
-      - channels:read
       - chat:write
       - commands
       - groups:read
+      - groups:write.invites
 settings:
   interactivity:
     is_enabled: true

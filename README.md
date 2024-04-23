@@ -1,4 +1,4 @@
-Heelie is a Node app built on the Bolt library.
+Heelie is a Node app built on the [Bolt library](https://slack.dev/bolt-js/tutorial/getting-started).
 
 ### 1. Create Slack App
 * Go to https://api.slack.com/apps
