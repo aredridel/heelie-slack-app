@@ -13,10 +13,10 @@ const joinPrivate = async ({
   }
 
   const chans = await Group.get(client);
-  const channelName = command.text.replace(/^\#/, '');
+  const channelName = command.text.replace(/^#/, '');
   const channel = chans.find((g) => g.name === channelName);
   if (!channel) {
-    respond(`#${channelName} not found. Heelie must be a member of ${channelName}.`);
+    respond(`#${channelName} not found. Heelie must be a member of #${channelName}.`);
   }
 
   await sendInviteRequest(client, channelName, command.user_id);

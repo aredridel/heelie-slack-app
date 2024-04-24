@@ -12,6 +12,7 @@ const compat = new FlatCompat({baseDirectory: __dirname, recommendedConfig: plug
 
 export default [
   {files: ["**/*.js"], languageOptions: {sourceType: "commonjs"}},
-  {languageOptions: { globals: globals.browser }},
+  {ignores: ["eslint.config.mjs"]}, // Uses ESM not CJS :rolling_eyes:
+  {languageOptions: { globals: globals.node }},
   ...compat.extends("airbnb-base"),
 ];

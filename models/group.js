@@ -1,23 +1,21 @@
-const get = async (client, filter) => {
-  filter = filter || /.*/;
+const CHANNEL_FETCH_LIMIT = 100;
 
+const get = async (client) => {
   const conversations = await client.conversations.list({
     types: 'private_channel',
     exclude_archived: true,
-    limit: 100,
+    limit: CHANNEL_FETCH_LIMIT,
   });
 
   const channels = conversations.channels.filter((g) => (
-    (g.name.match(filter) || `#${g.name}`.match(filter) || g.purpose.value.match(filter))
-    && !g.name.match(/^admin/i)
-    && !g.purpose.value.match(/\[secret\]/gi)
+    !g.name.match(/^admin/i)
   ));
 
   const memberPopulatedChannelsP = channels.map(async (g) => {
     // note: not paginated
     const res = await client.conversations.members({ channel: g.id });
 
-    g.members = res.members;
+    g.members = res.members; // eslint-disable-line
     return g;
   });
 

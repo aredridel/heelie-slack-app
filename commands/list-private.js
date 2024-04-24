@@ -7,7 +7,7 @@ function formatChannel(chan, user) {
     type: 'section',
     text: {
       type: 'mrkdwn',
-      text: `*${chan.name}* [${chan.members.length - 1}]\n${purpose}`,
+      text: `*${chan.name}* [${chan.num_members}]\n${purpose}`,
     },
     ...(!userInChannel && {
       accessory: {
