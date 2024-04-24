@@ -8,7 +8,7 @@ const joinPrivate = async ({
   await ack();
 
   if (!command.text) {
-    respond('A channel is required. Use `/list-private` to see a list of available private channels');
+    await respond('A channel is required. Use `/list-private` to see a list of available private channels');
     return;
   }
 

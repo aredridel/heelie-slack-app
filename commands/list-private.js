@@ -30,9 +30,9 @@ function formatChannel(chan, user) {
   };
 }
 
-function displayGroupList(filter, user, groups) {
+function displayGroupList(user, groups) {
   return {
-    text: 'These channels are private to disallow previewing (view without join). Available private channels: ',
+    text: 'These channels are private to disallow previewing (view without join). Available private channels:',
     blocks: [{
       type: 'section',
       text: {
@@ -51,16 +51,15 @@ const listPrivate = async ({
 }) => {
   await ack();
 
-  const filter = command.filter ? new RegExp(command.filter) : null;
-  let chans = await Group.get(client, filter);
+  let chans = await Group.get(client);
   if (command.text !== '--all') {
     chans = chans.filter((c) => !c.members.find((m) => m === command.user_id));
   }
 
   if (chans && chans.length) {
-    respond(displayGroupList(filter, command.user_id, chans));
+    await respond(displayGroupList(command.user_id, chans));
   } else {
-    respond(filter ? `No channels matching \`${filter}\`` : 'No private channels available');
+    await respond('No private channels found');
   }
 };
 

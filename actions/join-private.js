@@ -35,13 +35,13 @@ const joinPrivateAction = async ({
   const userId = body.user.id;
 
   if (!channelId) {
-    respond('A channel is required. Use `/list-private` to see a list of available private channels.');
+    await respond('A channel is required. Use `/list-private` to see a list of available private channels.');
     return;
   }
 
   await sendInviteRequest(client, channelId, userId);
 
-  respond('Invite request sent to channel');
+  await respond('Invite request sent to channel');
 };
 
 module.exports = { joinPrivateAction, sendInviteRequest };

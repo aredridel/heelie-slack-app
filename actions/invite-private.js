@@ -10,7 +10,7 @@ const invitePrivateAction = async ({
     users: userId,
   });
 
-  respond(`Invite sent to <@${userId}> by <@${body.user.id}>!`);
+  await respond(`Invite sent to <@${userId}> by <@${body.user.id}>!`);
 };
 
 module.exports = { invitePrivateAction };
