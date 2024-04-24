@@ -1,5 +1,12 @@
 const Group = require('../models/group');
 
+function comparator(g1, g2) {
+  if (g1.name < g2.name) return -1;
+  if (g1.name > g2.name) return 1;
+
+  return 0;
+}
+
 function formatChannel(chan, user) {
   const purpose = chan.purpose.value.replace(/\[[^\]]*\]/g, '');
   const userInChannel = chan.members.find((m) => m === user);
@@ -35,7 +42,7 @@ function displayGroupList(filter, user, groups) {
     },
     {
       type: 'divider',
-    }, ...groups.map((g) => formatChannel(g, user))],
+    }, ...groups.sort(comparator).map((g) => formatChannel(g, user))],
   };
 }
 
