@@ -1,5 +1,5 @@
 const { App } = require('@slack/bolt');
-const { redisStore } = require('./lib/redis-store');
+const { fileStore } = require('./lib/file-store');
 
 // Commands
 const { admin } = require('./commands/admin');
@@ -16,9 +16,11 @@ const app = new App({
   signingSecret: process.env.SLACK_SIGNING_SECRET,
   clientId: process.env.SLACK_CLIENT_ID,
   clientSecret: process.env.SLACK_CLIENT_SECRET,
-  stateSecret: 'my-secret',
+  installerOptions: {
+    stateVerification: false,
+  },
   scopes: ['chat:write', 'commands', 'groups:read', 'groups:write.invites'],
-  installationStore: redisStore,
+  installationStore: fileStore,
 });
 
 // Commands
